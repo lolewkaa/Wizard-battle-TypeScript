@@ -1,0 +1,119 @@
+.battle {
+  width: 1240px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../../images/stars.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.battle__container {
+  max-width: 600px;
+ display: flex;
+}
+
+.battle__containers {
+  display: flex;
+  justify-content: space-between;
+}
+
+.battle__healthLine {
+  width: 30px;
+  background-color: rgb(0, 255, 127);
+  text-align: left;
+  border-radius: 5px;
+  padding: 1px;
+  text-align: center;
+}
+
+.battle__manaLine {
+  width: 30px;
+  background-color: rgb(255, 20, 147);
+  text-align: left;
+  border-radius: 5px;
+  padding: 1px;
+  text-align: center;
+}
+
+.battle__text {
+  font-size: 25px;
+  color: black;
+  margin: 30px 120px 30px 120px;
+  padding: 10px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: normal;
+  border-radius: 30px;
+}
+
+.battle__textPoints {
+  font-size: 25px;
+  color: rgba(255, 241, 163, 1);
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: normal;
+  grid-area: text;
+  border-radius: 30px;
+}
+
+.battle__boxPoints {
+  display: flex;
+  align-items: flex-end;
+  height: 180px;
+}
+
+.battle__points {
+  width: 90px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.battle__spells {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.battle__box {
+  max-width: 200px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.disable {
+  color: rgba(255, 241, 163, 1);
+  border: 1px solid rgba(255, 241, 163, 1);
+}
+
+.battle__textBox {
+  width: 1240px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.spell {
+  background-color: black;
+border: 1px solid rgba(0, 0, 205);
+border-radius: 15px;
+font-weight: 'Montserrat', Arial, sans-serif;
+font-size: 15px;
+line-height: 1.1;
+color: rgba(255, 228, 225);
+font-weight: normal;
+margin: 0;
+padding: 5px;
+width: 180px;
+height: 80px;
+text-align: center;
+}
+
+.spell__disable {
+  border: 1px solid rgba(0, 0, 205, 0.5);
+  color: rgba(255, 228, 225, 0.5);
+}

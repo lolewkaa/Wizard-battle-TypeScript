@@ -1,0 +1,43 @@
+.manual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.manual__container {
+    max-width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.manual__box {
+  display: flex;
+  align-items: center;
+  max-width: 1240px;
+  margin: 30px auto 30px auto;
+  background-image: url('../../images/stars.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.manual__button {
+  background-color: black;
+  border: 1px solid rgba(255, 241, 163, 1);
+  border-radius: 15px;
+  font-weight: 'Montserrat', Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.1;
+  color: rgba(255, 241, 163, 1);
+  font-weight: normal;
+  margin: 0 30px 300px 30px;
+  padding: 5px;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+}
+
+.disable {
+  border: 1px solid rgba(255, 241, 163, 0.5);
+  color: rgba(255, 241, 163, 0.5);
+}
