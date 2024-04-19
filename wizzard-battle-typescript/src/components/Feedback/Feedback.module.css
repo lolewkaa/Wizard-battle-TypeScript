@@ -1,0 +1,130 @@
+.feedBack {
+    max-width: 100%;
+    min-height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .feedBack__box {
+    min-width: 500px;
+    min-height: 580px;
+  }
+  
+  .feedBack__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 241, 163, 1);
+      border-radius: 15px;
+      background-color: black;
+      min-height: 100%;
+  }
+  
+  .feedBack__starsBox {
+    margin-top: 10px;
+  }
+  
+  .feedBack__err {
+    color: red;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .feedBack__stars {
+    min-height: 408px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 390px;
+    text-align: center;
+  }
+  
+  .feedBack__input {
+    background-color: black;
+    border: 1px solid rgba(255, 241, 163, 1);
+    color: rgba(255, 241, 163, 1);
+    border-radius: 5px;
+    min-width: 250px;
+    margin: 10px 0 0 0;
+  }
+  
+  .feedBack__comment {
+    background-color: black;
+    border: 1px solid rgba(255, 241, 163, 1);
+    color: rgba(255, 241, 163, 1);
+    border-radius: 5px;
+    min-width: 300px;
+    font-size: 15px;
+    margin-top: 5px;
+  }
+  
+  .feedBack__checkBoxInput {
+    background-color: black;
+    border: 1px solid rgba(255, 241, 163, 1);
+    color: rgba(255, 241, 163, 1);
+    margin-right: 15px;
+  }
+  
+  .feedBack__star {
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+  }
+  
+  .feedBack__star:last-of-type {
+    margin-right: 0;
+  }
+  
+  .feedBack__checkBoxContainer {
+      display: flex;
+      justify-content: flex-start;
+      width: 390px;
+      align-items: center;
+      margin: 10px 0 10px 0;
+  }
+  
+  .feedBack__text {
+    font-size: 20px;
+    color: rgba(255, 241, 163, 1);
+    margin: 10px 0 0 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.1;
+  }
+  
+  .feedBack__subtitle {
+    font-size: 17px;
+    color: rgba(255, 241, 163, 1);
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.4;
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+  
+  .feedBack__button {
+    border: 1px solid rgba(255, 241, 163, 1);
+    background-color: black;
+    font-size: 20px;
+    color: rgba(255, 241, 163, 1);
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.1;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+  }
+  
+  .disable {
+    border: 1px solid rgba(255, 241, 163, 0.5);
+    color: rgba(255, 241, 163, 0.5);
+    width: 150px;
+    height: 50px;
+  }
