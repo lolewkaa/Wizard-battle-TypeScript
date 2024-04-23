@@ -16,7 +16,7 @@
   align-items: center;
   max-width: 1240px;
   margin: 30px auto 30px auto;
-  background-image: url('../../images/stars.png');
+  background-image: url('../../assets/images/stars.png');
   background-repeat: no-repeat;
   background-size: contain;
 }

@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect, useState, SetStateAction, Dispatch,
+} from "react";
 import classNames from 'classnames';
 import { useLocation } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 import styles from "./Battle.module.css";
-import Card from "../Card/Card.tsx";
-import Spell from "../Spell/Spell.tsx";
-import PopupWithMessage from "../PopupWithMessage/PopupWithMessage.tsx";
+import Card from "../../components/Card/Card.tsx";
+import Spell from "../../components/Spell/Spell.tsx";
+import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
 import getSpells from "../../services/spells.tsx";
 import { getWizzardById } from "../../services/wizzards.tsx";
 
 type Props = {
   isOpenPopup: boolean,
-  setIsBattleStarted: any,
-  setIsOpenPopup: any
+  setIsBattleStarted: Dispatch<SetStateAction<boolean | void>>,
+  setIsOpenPopup: Dispatch<SetStateAction<boolean>>
 }
 
 type SpellObject = {
@@ -35,16 +37,18 @@ const Battle: React.FC<Props> = ({
   isOpenPopup,
   setIsOpenPopup,
 }) => {
+  const firstOpponentJson = localStorage.getItem('firstOpponentId');
   const [firstOpponent, setFirstOpponent] = useState({
-    id: JSON.parse(localStorage.getItem("firstOpponentId") as string).id,
+    id: firstOpponentJson ? JSON.parse(firstOpponentJson) : null,
     firstName: "",
     lastName: "",
     healthPoints: 200,
     manaPoints: 200,
   });
 
+  const secondOpponentJson = localStorage.getItem('secondOpponentId');
   const [secondOpponent, setSecondOpponent] = useState({
-    id: JSON.parse(localStorage.getItem("secondOpponentId") as string).id,
+    id: secondOpponentJson ? JSON.parse(secondOpponentJson) : null,
     firstName: "",
     lastName: "",
     healthPoints: 200,
@@ -185,9 +189,7 @@ const Battle: React.FC<Props> = ({
           <div className={styles.battle__containers}>
         <div className={styles.battle__container}>
         <div className={styles.battle__spells}>
-            {spells.map((spell: SpellObject) => {
-              if (spells.indexOf(spell) < 20) {
-                return (
+            {spells.map((spell: SpellObject) => (
                   <Spell
                     spellName={spell.name}
                     key={spell.id}
@@ -199,9 +201,7 @@ const Battle: React.FC<Props> = ({
                       [styles.spell__disable]: firstOpponentSpellsDisabled,
                     })}
                   />
-                );
-              }
-            })}
+            )).slice(0, 14)}
           </div>
           <div className={styles.battle__box}>
             <Card
@@ -258,9 +258,7 @@ const Battle: React.FC<Props> = ({
             </div>
           </div>
           <div className={styles.battle__spells}>
-            {spells.map((spell: SpellObject) => {
-              if (spells.indexOf(spell) > 20 && spells.indexOf(spell) <= 40) {
-                return (
+            {spells.map((spell: SpellObject) => (
                   <Spell
                     spellName={spell.name}
                     key={spell.id}
@@ -272,9 +270,7 @@ const Battle: React.FC<Props> = ({
                       [styles.spell__disable]: secondOpponentSpellsDisabled,
                     })}
                   />
-                );
-              }
-            })}
+            )).slice(15, 31)}
           </div>
         </div>
         </div>

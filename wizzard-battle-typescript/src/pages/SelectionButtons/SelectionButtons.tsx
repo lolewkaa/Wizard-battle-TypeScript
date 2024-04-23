@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SelectionButtons.module.css';
-import Button from '../Button/Button.tsx';
-import backgroundWood from '../../images/Background.jpg';
-import stars from '../../images/stars.png';
+import Button from '../../components/Button/Button.tsx';
+import backgroundWood from '../../assets/images/Background.jpg';
+import stars from '../../assets/images/stars.png';
 
 const SelectionButtons: React.FC = () => {
   const navigate = useNavigate();

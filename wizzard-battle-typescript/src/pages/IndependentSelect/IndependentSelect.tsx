@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, useEffect, SetStateAction, Dispatch,
+} from 'react';
 import classNames from 'classnames';
 import styles from './IndependentSelect.module.css';
-import Card from '../Card/Card.tsx';
-import PopupWithMessage from '../PopupWithMessage/PopupWithMessage.tsx';
+import Card from '../../components/Card/Card.tsx';
+import PopupWithMessage from '../../components/PopupWithMessage/PopupWithMessage.tsx';
 import { getWizzards } from '../../services/wizzards.tsx';
 
 type Props = {
     isOpenPopup: boolean,
-    setIsOpenPopup: any
+    setIsOpenPopup: Dispatch<SetStateAction<boolean>>
 }
 
 type WizardObject = {
@@ -18,8 +20,14 @@ type WizardObject = {
 
 const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => {
   const [isDisableButton, setIsDisableButton] = useState(false);
-  const [firstOpponentId, setFirstOpponentId] = useState(JSON.parse(localStorage.getItem('firstOpponentId') as string) || '');
-  const [secondOpponentId, setSecondOpponentId] = useState(JSON.parse(localStorage.getItem('secondOpponentId') as string) || '');
+  const firstOpponentJson = localStorage.getItem('firstOpponentId');
+  const secondOpponentJson = localStorage.getItem('secondOpponentId');
+  const [firstOpponentId, setFirstOpponentId] = useState(
+    firstOpponentJson ? JSON.parse(firstOpponentJson) : null,
+  );
+  const [secondOpponentId, setSecondOpponentId] = useState(
+    secondOpponentJson ? JSON.parse(secondOpponentJson) : null,
+  );
   const [wizzardsData, setWizzardsData] = useState([]);
 
   useEffect(() => {

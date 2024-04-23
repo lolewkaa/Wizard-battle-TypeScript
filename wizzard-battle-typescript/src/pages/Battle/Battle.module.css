@@ -3,7 +3,7 @@
     margin: 0 auto 30px auto;
     display: flex;
     flex-direction: column;
-    background-image: url('../../images/stars.png');
+    background-image: url('../../assets/images/stars.png');
     background-repeat: no-repeat;
     background-size: cover;
   }
