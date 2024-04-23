@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Route, Routes } from 'react-router-dom';
 import styles from './App.module.css';
-import Header from '../Header/Header.tsx';
-import SelectionButtons from '../SelectionButtons/SelectionButtons.tsx';
-import Footer from '../Footer/Footer.tsx';
-import AutoSelect from '../AutoSelect/AutoSelect.tsx';
-import IndependentSelect from '../IndependentSelect/IndependentSelect.tsx';
-import Battle from '../Battle/Battle.tsx';
-import PopupWithWarning from '../PopupWithWarning/PopupWithWarning.tsx';
-import Feedback from '../Feedback/Feedback.tsx';
+import Header from './components/Header/Header.tsx';
+import SelectionButtons from './pages/SelectionButtons/SelectionButtons.tsx';
+import Footer from './components/Footer/Footer.tsx';
+import AutoSelect from './pages/AutoSelect/AutoSelect.tsx';
+import IndependentSelect from './pages/IndependentSelect/IndependentSelect.tsx';
+import Battle from './pages/Battle/Battle.tsx';
+import PopupWithWarning from './components/PopupWithWarning/PopupWithWarning.tsx';
+import Feedback from './pages/Feedback/Feedback.tsx';
 
 const App: React.FC = () => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [isOpenPopupWarning, setIsOpenPopupWarning] = useState(false);
-  const [isBattleStarted, setIsBattleStarted] = useState(
-    JSON.parse(localStorage.getItem("isBattleStarted") as string) || false,
+  const isBattleStartedJson = localStorage.getItem('isBattleStarted');
+  const [isBattleStarted, setIsBattleStarted] = useState<boolean | void>(
+    isBattleStartedJson ? JSON.parse(isBattleStartedJson) : null || false,
   );
   const location = useLocation();
   useEffect(() => {

@@ -3,15 +3,15 @@ import classNames from 'classnames';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import styles from './Feedback.module.css';
-import inactiveStar from '../../images/heart_3hgfdgqrwsv4.svg';
-import activeStart from '../../images/heart_3hgfdgqrwsv4 (1).svg';
+import inactiveStar from '../../assets/images/heart_3hgfdgqrwsv4.svg';
+import activeStart from '../../assets/images/heart_3hgfdgqrwsv4 (1).svg';
 
 const Feedback: React.FC = () => {
   const [agreeCheckboxChecked, setAgreeCheckboxChecked] = useState(false);
   const [connectionCheckboxChecked, setConnectionCheckboxChecked] = useState(false);
 
   // звездный рейтинг
-  const [currentItem, setCurrentItem] = useState();
+  const [currentItem, setCurrentItem] = useState<undefined | number>(undefined);
   const [, setHoverItem] = useState(0);
   const stars = Array(5).fill(0);
   const lowRating = currentItem < 3;
@@ -127,7 +127,7 @@ const Feedback: React.FC = () => {
                 [styles.disable]: !isValid,
               })}
               disabled={!isValid && !dirty}
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
               type={'submit'}
               >
                 Send

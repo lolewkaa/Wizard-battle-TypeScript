@@ -1,7 +1,7 @@
 .auto {
     max-width: 100%;
     height: calc(100vh - 122px);
-    background-image: url('../../images/stars.png');
+    background-image: url('../../assets/images/stars.png');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;

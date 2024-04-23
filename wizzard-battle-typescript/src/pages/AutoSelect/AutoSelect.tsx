@@ -1,32 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect, useState, SetStateAction, Dispatch,
+} from "react";
 import classNames from 'classnames';
 import styles from "./AutoSelect.module.css";
-import Card from "../Card/Card.tsx";
-import PopupWithMessage from "../PopupWithMessage/PopupWithMessage.tsx";
+import Card from "../../components/Card/Card.tsx";
+import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
 import { getWizzards } from '../../services/wizzards.tsx';
 import { getRandomWizzard } from '../../utils/utils.tsx';
 
 type Props = {
     isOpenPopup: boolean,
-    setIsOpenPopup: any
+    setIsOpenPopup: Dispatch<SetStateAction<boolean>>
 }
 
 const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
   const [isDisableButton, setIsDisableButton] = useState(false);
   const [wizzardsData, setWizzardsData] = useState([]);
+  const firstOpponentJson = localStorage.getItem('firstOpponentId');
+  const secondOpponentJson = localStorage.getItem('secondOpponentId');
+
   const [firstOpponent, setFirstOpponent] = useState(
-    JSON.parse(localStorage.getItem('firstOpponentId') as string) || null,
+    firstOpponentJson ? JSON.parse(firstOpponentJson) : null,
   );
   const [secondOpponent, setSecondOpponent] = useState(
-    JSON.parse(localStorage.getItem('secondOpponentId') as string) || null,
+    secondOpponentJson ? JSON.parse(secondOpponentJson) : null,
   );
 
   useEffect(() => {
     if (localStorage.getItem("firstOpponentId") !== undefined) {
-      setFirstOpponent(JSON.parse(localStorage.getItem("firstOpponentId") as string));
+      setFirstOpponent(firstOpponentJson ? JSON.parse(firstOpponentJson) : null);
     }
     if (localStorage.getItem('secondOpponentId') !== undefined) {
-      setFirstOpponent(JSON.parse(localStorage.getItem('secondOpponentId') as string));
+      setFirstOpponent(secondOpponentJson ? JSON.parse(secondOpponentJson) : null);
     }
     localStorage.setItem('opponentsFrom', JSON.stringify('autoSelect'));
     getWizzards()
@@ -41,7 +46,7 @@ const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
     }, 200);
     setTimeout(() => {
       clearInterval(animation);
-      setFirstOpponent(getRandomWizzard(wizzardsData));
+      setFirstOpponent((getRandomWizzard(wizzardsData)));
       setSecondOpponent(getRandomWizzard(wizzardsData));
       setIsDisableButton(false);
     }, 3000);

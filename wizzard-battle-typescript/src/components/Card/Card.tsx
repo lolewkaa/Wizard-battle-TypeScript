@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './Card.module.css';
-import wizardImg from '../../images/cartman.jpg';
+import wizardImg from '../../assets/images/cartman.jpg';
 
 type Props = {
     name: string,
