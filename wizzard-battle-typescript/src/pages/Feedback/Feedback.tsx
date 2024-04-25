@@ -3,18 +3,16 @@ import classNames from 'classnames';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import styles from './Feedback.module.css';
-import inactiveStar from '../../assets/images/heart_3hgfdgqrwsv4.svg';
-import activeStart from '../../assets/images/heart_3hgfdgqrwsv4 (1).svg';
+import StarRate from '../../components/ui/StarRate.tsx';
 
 const Feedback: React.FC = () => {
   const [agreeCheckboxChecked, setAgreeCheckboxChecked] = useState(false);
   const [connectionCheckboxChecked, setConnectionCheckboxChecked] = useState(false);
 
-  // звездный рейтинг
-  const [currentItem, setCurrentItem] = useState<undefined | number>(undefined);
+  const [currentItem, setCurrentItem] = useState<number | undefined>(undefined);
+  const lowRating = currentItem < 3;
   const [, setHoverItem] = useState(0);
   const stars = Array(5).fill(0);
-  const lowRating = currentItem < 3;
 
   /** Создаем схему валидации */
   const validationsSchema = yup.object().shape({
@@ -36,9 +34,11 @@ const Feedback: React.FC = () => {
           values.email = '';
           values.name = '';
           values.comment = '';
-          setCurrentItem();
+          setCurrentItem(undefined);
           localStorage.removeItem("secondOpponentId");
           localStorage.removeItem("firstOpponentId");
+          localStorage.removeItem("firstOpponent");
+          localStorage.removeItem("secondOpponent");
           localStorage.removeItem("isBattleStarted");
         }}
         validationSchema={validationsSchema}
@@ -80,19 +80,12 @@ const Feedback: React.FC = () => {
               }
               {
                 <div className={styles.feedBack__stars}>
-                  <div className={styles.feedBack__starsBox}>
-                {
-                  stars.map((item, index: number) => (
-                      <img onClick={() => setCurrentItem(index)}
-                        key={index}
-                        src={ index <= currentItem ? activeStart : inactiveStar}
-                        className={styles.feedBack__star}
-                        onMouseMove={() => setHoverItem(index)}
-                        // onMouseOut={() => setHoverItem(item)}
-                       />
-                  ))
-                }
-                </div>
+                  <StarRate
+                  currentItem={currentItem}
+                  setHoverItem={setHoverItem}
+                  stars={stars}
+                  setCurrentItem={setCurrentItem}
+                  />
                 <label className={styles.feedBack__text} htmlFor={'comment'}>Comment</label>
               <input
                 className={styles.feedBack__comment}

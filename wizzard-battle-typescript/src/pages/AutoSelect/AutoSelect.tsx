@@ -7,6 +7,7 @@ import Card from "../../components/Card/Card.tsx";
 import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
 import { getWizzards } from '../../services/wizzards.tsx';
 import { getRandomWizzard } from '../../utils/utils.tsx';
+import useLocalStorage from "../../hooks/useLocalStorage.tsx";
 
 type Props = {
     isOpenPopup: boolean,
@@ -16,24 +17,10 @@ type Props = {
 const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
   const [isDisableButton, setIsDisableButton] = useState(false);
   const [wizzardsData, setWizzardsData] = useState([]);
-  const firstOpponentJson = localStorage.getItem('firstOpponentId');
-  const secondOpponentJson = localStorage.getItem('secondOpponentId');
-
-  const [firstOpponent, setFirstOpponent] = useState(
-    firstOpponentJson ? JSON.parse(firstOpponentJson) : null,
-  );
-  const [secondOpponent, setSecondOpponent] = useState(
-    secondOpponentJson ? JSON.parse(secondOpponentJson) : null,
-  );
+  const [firstOpponent, setFirstOpponent] = useLocalStorage("firstOpponent", null);
+  const [secondOpponent, setSecondOpponent] = useLocalStorage("secondOpponent", null);
 
   useEffect(() => {
-    if (localStorage.getItem("firstOpponentId") !== undefined) {
-      setFirstOpponent(firstOpponentJson ? JSON.parse(firstOpponentJson) : null);
-    }
-    if (localStorage.getItem('secondOpponentId') !== undefined) {
-      setFirstOpponent(secondOpponentJson ? JSON.parse(secondOpponentJson) : null);
-    }
-    localStorage.setItem('opponentsFrom', JSON.stringify('autoSelect'));
     getWizzards()
       .then((res) => setWizzardsData(res));
   }, []);
@@ -52,13 +39,6 @@ const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
     }, 3000);
   };
 
-  useEffect(() => {
-    localStorage.setItem('firstOpponentId', JSON.stringify(firstOpponent));
-  }, [firstOpponent]);
-
-  useEffect(() => {
-    localStorage.setItem('secondOpponentId', JSON.stringify(secondOpponent));
-  }, [secondOpponent]);
   function openPopup() {
     setIsOpenPopup(true);
   }

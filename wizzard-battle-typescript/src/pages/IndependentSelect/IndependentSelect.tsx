@@ -6,6 +6,7 @@ import styles from './IndependentSelect.module.css';
 import Card from '../../components/Card/Card.tsx';
 import PopupWithMessage from '../../components/PopupWithMessage/PopupWithMessage.tsx';
 import { getWizzards } from '../../services/wizzards.tsx';
+import useLocalStorage from '../../hooks/useLocalStorage.tsx';
 
 type Props = {
     isOpenPopup: boolean,
@@ -20,14 +21,8 @@ type WizardObject = {
 
 const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => {
   const [isDisableButton, setIsDisableButton] = useState(false);
-  const firstOpponentJson = localStorage.getItem('firstOpponentId');
-  const secondOpponentJson = localStorage.getItem('secondOpponentId');
-  const [firstOpponentId, setFirstOpponentId] = useState(
-    firstOpponentJson ? JSON.parse(firstOpponentJson) : null,
-  );
-  const [secondOpponentId, setSecondOpponentId] = useState(
-    secondOpponentJson ? JSON.parse(secondOpponentJson) : null,
-  );
+  const [firstOpponent, setFirstOpponent] = useLocalStorage('firstOpponent', null);
+  const [secondOpponent, setSecondOpponent] = useLocalStorage('secondOpponent', null);
   const [wizzardsData, setWizzardsData] = useState([]);
 
   useEffect(() => {
@@ -38,34 +33,25 @@ const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => 
     setIsOpenPopup(true);
   }
 
-  const toggleSelectionOpponent = (id: string, opponent: string) => {
-    if (opponent === 'firstOpponentId') {
-      if (firstOpponentId === id) {
-        setFirstOpponentId('');
-      } else {
-        setFirstOpponentId(id);
-      }
+  const toggleFirstOpponent = (wizardData: WizardObject) => {
+    if (firstOpponent !== null && firstOpponent.id === wizardData.id) {
+      setFirstOpponent(null);
+    } else {
+      setFirstOpponent(wizardData);
     }
-    if (opponent === 'secondOpponentId') {
-      if (secondOpponentId === id) {
-        setSecondOpponentId('');
-      } else {
-        setSecondOpponentId(id);
-      }
+  };
+
+  const toggleSecondOpponent = (wizardData: WizardObject) => {
+    if (secondOpponent !== null && secondOpponent.id === wizardData.id) {
+      setSecondOpponent(null);
+    } else {
+      setSecondOpponent(wizardData);
     }
   };
 
   useEffect(() => {
-    localStorage.setItem('firstOpponentId', JSON.stringify(firstOpponentId));
-  }, [firstOpponentId]);
-
-  useEffect(() => {
-    localStorage.setItem('secondOpponentId', JSON.stringify(secondOpponentId));
-  }, [secondOpponentId]);
-
-  useEffect(() => {
-    setIsDisableButton(firstOpponentId === '' || secondOpponentId === '');
-  }, [firstOpponentId, secondOpponentId]);
+    setIsDisableButton(firstOpponent === null || secondOpponent === null);
+  }, [firstOpponent, secondOpponent]);
   return (
           <>
             <section className={styles.manual}>
@@ -73,8 +59,8 @@ const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => 
                 <div className={styles.manual__container}>
                 {wizzardsData.map((wizzard: WizardObject) => (
                     <Card
-                      colorPlace={wizzard.id === firstOpponentId}
-                      toggleSelectionOpponent = {() => toggleSelectionOpponent(wizzard.id, 'firstOpponentId')}
+                      colorPlace={firstOpponent !== null && wizzard.id === firstOpponent.id}
+                      toggleSelectionOpponent = {() => toggleFirstOpponent(wizzard)}
                       key={wizzard.id}
                       name={wizzard.firstName}
                       lastName={wizzard.lastName}
@@ -88,8 +74,8 @@ const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => 
                 <div className={styles.manual__container}>
                 {wizzardsData.map((wizzard: WizardObject) => (
                     <Card
-                      colorPlace={wizzard.id === secondOpponentId}
-                      toggleSelectionOpponent = {() => toggleSelectionOpponent(wizzard.id, 'secondOpponentId')}
+                      colorPlace={secondOpponent !== null && wizzard.id === secondOpponent.id}
+                      toggleSelectionOpponent = {() => toggleSecondOpponent(wizzard)}
                       key={wizzard.id}
                       name={wizzard.firstName}
                       lastName={wizzard.lastName}
