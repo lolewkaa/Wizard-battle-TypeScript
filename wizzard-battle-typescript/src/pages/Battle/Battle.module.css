@@ -1,6 +1,6 @@
 .battle {
     width: 1240px;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 0 auto;
     display: flex;
     flex-direction: column;
     background-image: url('../../assets/images/stars.png');
@@ -16,6 +16,7 @@
   .battle__containers {
     display: flex;
     justify-content: space-between;
+    margin: 0 5px 30px 5px;
   }
   
   .battle__healthLine {

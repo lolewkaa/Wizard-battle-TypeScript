@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -8,11 +8,18 @@ import StarRate from '../../components/ui/StarRate.tsx';
 const Feedback: React.FC = () => {
   const [agreeCheckboxChecked, setAgreeCheckboxChecked] = useState(false);
   const [connectionCheckboxChecked, setConnectionCheckboxChecked] = useState(false);
-
-  const [currentItem, setCurrentItem] = useState<number | undefined>(undefined);
-  const lowRating = currentItem < 3;
+  const [isLowRating, setIsLowRating] = useState(false);
+  const [currentItem, setCurrentItem] = useState<null | number>(null);
   const [, setHoverItem] = useState(0);
   const stars = Array(5).fill(0);
+
+  useEffect(() => {
+    if (currentItem !== null && currentItem < 3) {
+      setIsLowRating(true);
+    } else {
+      setIsLowRating(false);
+    }
+  }, [currentItem]);
 
   /** Создаем схему валидации */
   const validationsSchema = yup.object().shape({
@@ -20,6 +27,7 @@ const Feedback: React.FC = () => {
     email: yup.string().email('Введите корректный E-mail').required('Это обязательное поле'),
     comment: yup.string(),
   });
+
   return (
     <section className={styles.feedBack}>
       <div className={styles.feedBack__box}>
@@ -34,7 +42,7 @@ const Feedback: React.FC = () => {
           values.email = '';
           values.name = '';
           values.comment = '';
-          setCurrentItem(undefined);
+          setCurrentItem(null);
           localStorage.removeItem("secondOpponentId");
           localStorage.removeItem("firstOpponentId");
           localStorage.removeItem("firstOpponent");
@@ -101,7 +109,7 @@ const Feedback: React.FC = () => {
             Consent to personal data processing
             </h2>
           </div>
-          {lowRating && <>
+          {isLowRating && <>
           <h2 className={styles.feedBack__subtitle}>We are sorry that you did not like the game.
             We would like to be better. If you have a problem while playing or have any ideas,
             how to make it better, describe everything in the comments.

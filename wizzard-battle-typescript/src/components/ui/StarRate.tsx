@@ -1,13 +1,15 @@
-import React, { SetStateAction, Dispatch } from 'react';
+import React from 'react';
 import styles from './StarRate.module.css';
 import inactiveStar from '../../assets/images/heart_3hgfdgqrwsv4.svg';
 import activeStart from '../../assets/images/heart_3hgfdgqrwsv4 (1).svg';
 
 type Props = {
-    currentItem: number,
-    setHoverItem: Dispatch<SetStateAction<number>>,
+    currentItem: number | null,
+    // eslint-disable-next-line no-unused-vars
+    setHoverItem: (arg: number) => void,
     stars: Array<number>,
-    setCurrentItem: Dispatch<SetStateAction<number | undefined>>
+    // eslint-disable-next-line no-unused-vars
+    setCurrentItem: (arg: number | null) => void
 }
 
 const StarRate: React.FC<Props> = ({
@@ -18,7 +20,9 @@ const StarRate: React.FC<Props> = ({
                   stars.map((item, index: number) => (
                       <img onClick={() => setCurrentItem(index)}
                         key={index}
-                        src={ index <= currentItem ? activeStart : inactiveStar}
+                        src={
+                          currentItem !== null && index <= currentItem ? activeStart : inactiveStar
+                        }
                         className={styles.feedBack__star}
                         onMouseMove={() => setHoverItem(index)}
                         // onMouseOut={() => setHoverItem(item)}

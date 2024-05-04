@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, SetStateAction, Dispatch,
+  useState, useEffect,
 } from 'react';
 import classNames from 'classnames';
 import styles from './IndependentSelect.module.css';
@@ -10,13 +10,14 @@ import useLocalStorage from '../../hooks/useLocalStorage.tsx';
 
 type Props = {
     isOpenPopup: boolean,
-    setIsOpenPopup: Dispatch<SetStateAction<boolean>>
+    // eslint-disable-next-line no-unused-vars
+    setIsOpenPopup: (arg: boolean) => void
 }
 
 type WizardObject = {
     id: string,
     firstName: string,
-    lastName: string
+    lastName: string,
 }
 
 const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => {

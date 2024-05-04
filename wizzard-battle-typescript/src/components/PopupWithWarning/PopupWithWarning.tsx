@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./PopupWithWarning.module.css";
 
 type Props = {
-    setIsOpenPopupWarning: any
+    // eslint-disable-next-line no-unused-vars
+    setIsOpenPopupWarning: (arg: boolean) => void
   }
 
 const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning }) => {

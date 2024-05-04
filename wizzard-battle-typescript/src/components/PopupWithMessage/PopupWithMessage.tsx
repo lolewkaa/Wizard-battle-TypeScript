@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./PopupWithMessage.module.css";
 
 type Props = {
-  setIsOpenPopup: any;
+  // eslint-disable-next-line no-unused-vars
+  setIsOpenPopup: (arg: boolean) => void;
   text: string;
 };
 

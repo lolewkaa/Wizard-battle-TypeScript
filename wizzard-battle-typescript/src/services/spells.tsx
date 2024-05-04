@@ -18,7 +18,7 @@ type SpellWithManaDamage = {
     damage: number,
     mana: number,
     manaDiapason: string,
-    damageDiapason: string
+    damageDiapason: string,
 }
 
 type FullSpell = SpellObject & SpellWithManaDamage

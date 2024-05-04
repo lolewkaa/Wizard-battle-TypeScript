@@ -102,7 +102,7 @@ const BattleCard: React.FC<Props> = ({
                       },
                     )}
                 />
-            )).slice(0, 20)}
+            ))}
         </div>
     </div>
   );

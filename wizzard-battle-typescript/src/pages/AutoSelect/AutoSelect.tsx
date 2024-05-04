@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, SetStateAction, Dispatch,
+  useEffect, useState,
 } from "react";
 import classNames from 'classnames';
 import styles from "./AutoSelect.module.css";
@@ -11,7 +11,8 @@ import useLocalStorage from "../../hooks/useLocalStorage.tsx";
 
 type Props = {
     isOpenPopup: boolean,
-    setIsOpenPopup: Dispatch<SetStateAction<boolean>>
+    // eslint-disable-next-line no-unused-vars
+    setIsOpenPopup: (arg: boolean) => void
 }
 
 const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
@@ -19,7 +20,7 @@ const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
   const [wizzardsData, setWizzardsData] = useState([]);
   const [firstOpponent, setFirstOpponent] = useLocalStorage("firstOpponent", null);
   const [secondOpponent, setSecondOpponent] = useLocalStorage("secondOpponent", null);
-
+  // const [isOpenPopup, setIsOpenPopup] = useState(false);
   useEffect(() => {
     getWizzards()
       .then((res) => setWizzardsData(res));

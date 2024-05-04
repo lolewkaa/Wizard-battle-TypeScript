@@ -1,10 +1,11 @@
 import React, {
-  useEffect, useState, SetStateAction, Dispatch,
+  useEffect, useState,
 } from "react";
 import classNames from 'classnames';
 // import { useLocation } from "react-router-dom";
 import styles from "./Battle.module.css";
-import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
+// import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
+import PopupWithRedirect from "../../components/PopupWithRedirect/PopupWithRedirect.tsx";
 import getSpells from "../../services/spells.tsx";
 import { getWizzardById } from "../../services/wizzards.tsx";
 import BattleCard from "../../components/BattleCard/BattleCard.tsx";
@@ -12,7 +13,8 @@ import useLocalStorage from "../../hooks/useLocalStorage.tsx";
 
 type Props = {
   isOpenPopup: boolean,
-  setIsOpenPopup: Dispatch<SetStateAction<boolean>>
+  // eslint-disable-next-line no-unused-vars
+  setIsOpenPopup: (arg: boolean) => void
 }
 
 type SpellObject = {
@@ -47,7 +49,13 @@ const Battle: React.FC<Props> = ({
   // const location = useLocation();
 
   useEffect(() => {
-    getSpells().then((res) => setSpells(res));
+    getSpells().then((res) => {
+      let arrLength: number = res.length;
+      if (arrLength > 20) {
+        arrLength = 20;
+      }
+      setSpells(res.slice(0, arrLength));
+    });
     getWizzardById(firstOpponent.id).then((res) => setFirstOpponent(res));
     getWizzardById(secondOpponent.id).then((res) => setSecondOpponent(res));
     // if (location.pathname === "/battle") {
@@ -58,10 +66,10 @@ const Battle: React.FC<Props> = ({
   }, []);
 
   function getFirstOpponentSpell(spell: SpellObject) {
-    const health = secondOpponent.healthPoints;
-    const spellDamage = spell.damage;
-    const mana = firstOpponent.manaPoints;
-    const usedMana = spell.mana;
+    const health: number = secondOpponent.healthPoints;
+    const spellDamage: number = spell.damage;
+    const mana: number = firstOpponent.manaPoints;
+    const usedMana: number = spell.mana;
     secondOpponent.healthPoints = health - spellDamage;
     firstOpponent.manaPoints = mana - usedMana;
     setisOpponentMove("second");
@@ -74,10 +82,10 @@ const Battle: React.FC<Props> = ({
   }
 
   function getSecondOpponentSpell(spell: SpellObject) {
-    const health = firstOpponent.healthPoints;
-    const spellDamage = spell.damage;
-    const mana = secondOpponent.manaPoints;
-    const usedMana = spell.mana;
+    const health: number = firstOpponent.healthPoints;
+    const spellDamage: number = spell.damage;
+    const mana: number = secondOpponent.manaPoints;
+    const usedMana: number = spell.mana;
     firstOpponent.healthPoints = health - spellDamage;
     secondOpponent.manaPoints = mana - usedMana;
     setisOpponentMove("first");
@@ -117,6 +125,7 @@ const Battle: React.FC<Props> = ({
     }
   }
   showWinner();
+  const closePopup = () => setIsOpenPopup(false);
   return (
     <>
       <section className={styles.battle}>
@@ -152,11 +161,17 @@ const Battle: React.FC<Props> = ({
         </div>
       </section>
       {isOpenPopup && (
+        <PopupWithRedirect
+          onClose={closePopup}
+          message={`Поздравляем, ${winnerName}, вы победили! Перенаправляем вас на главную страницу`}
+        />
+      )}
+      {/* {isOpenPopup && (
         <PopupWithMessage
           setIsOpenPopup={setIsOpenPopup}
           text={`Поздравляем, ${winnerName}, вы победили! Перенаправляем вас на главную страницу`}
         ></PopupWithMessage>
-      )}
+      )} */}
     </>
   );
 };
