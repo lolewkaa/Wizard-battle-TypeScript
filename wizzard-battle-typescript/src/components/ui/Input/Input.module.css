@@ -1,0 +1,18 @@
+.input {
+    background-color: black;
+    border: 1px solid rgba(255, 241, 163, 1);
+    color: rgba(255, 241, 163, 1);
+    border-radius: 5px;
+    min-width: 250px;
+    margin: 10px 0 0 0;
+  }
+
+  .text {
+    font-size: 20px;
+    color: rgba(255, 241, 163, 1);
+    margin: 10px 0 0 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.1;
+  }

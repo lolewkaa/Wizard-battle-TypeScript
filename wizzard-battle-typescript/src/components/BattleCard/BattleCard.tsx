@@ -37,7 +37,7 @@ type Props = {
 const BattleCard: React.FC<Props> = ({
   spells, opponentData, isOpponentTurn, useSpell,
 }) => {
-  const [opponentSpellsDisabled, setOpponentSpellsDisabled] = useState(true);
+  const [opponentSpellsDisabled, setOpponentSpellsDisabled] = useState<boolean>(true);
 
   const [propsAnimationHealth, setAnimationHealth] = useSpring(
     () => ({ height: 200 }),

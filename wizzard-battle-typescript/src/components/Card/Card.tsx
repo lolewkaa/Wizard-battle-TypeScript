@@ -17,7 +17,7 @@ const Card: React.FC<Props> = ({
   colorPlace,
 }) => {
   const location = useLocation();
-  const button = location.pathname === '/manual-selection';
+  const button: boolean = location.pathname === '/manual-selection';
 
   return (
           <>

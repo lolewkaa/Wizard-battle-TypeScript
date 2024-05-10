@@ -6,6 +6,7 @@
     background-image: url('../../assets/images/stars.png');
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: calc(100vh - 122px);
   }
   
   .battle__container {

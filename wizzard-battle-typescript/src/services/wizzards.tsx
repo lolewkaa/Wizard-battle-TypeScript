@@ -8,8 +8,6 @@ interface Wizard {
   lastName: string,
   healthPoints: number,
   manaPoints: number,
-  // почему если тут добавить еще одно свойство то не ругается?
-  // fake: number,
 }
 
 export const getWizzards = () => axios.get(wizzardsUrl).then((res) => res.data);

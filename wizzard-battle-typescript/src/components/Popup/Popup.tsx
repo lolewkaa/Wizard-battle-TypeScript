@@ -7,7 +7,7 @@ type Props = {
 }
 
 const Popup: React.FC<Props> = ({ onClose, children }) => (
-  <div>
+  <div className={styles.popup__container}>
     <div className={styles.popup}>
       {children}
     </div>

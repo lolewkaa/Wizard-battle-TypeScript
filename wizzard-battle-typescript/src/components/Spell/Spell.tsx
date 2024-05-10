@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../ui/Button/Button.tsx';
 
 type Props = {
     damageDiapason: string,
@@ -17,17 +18,28 @@ const Spell: React.FC<Props> = ({
   clickButton,
   spellClassName,
 }) => (
-    <><button
-      onClick={clickButton}
+
+  <Button
+      clickButton={clickButton}
       disabled={disableButton}
-      className={spellClassName}
+      buttonStyle={spellClassName}
     >
       {spellName}<br/>
       Урон:
       {damageDiapason}<br/>
       Мана: {manaDiapason}
-    </button>
-    </>
+    </Button>
+    // <><button
+    //   onClick={clickButton}
+    //   disabled={disableButton}
+    //   className={spellClassName}
+    // >
+    //   {spellName}<br/>
+    //   Урон:
+    //   {damageDiapason}<br/>
+    //   Мана: {manaDiapason}
+    // </button>
+    // </>
 );
 
 export default Spell;

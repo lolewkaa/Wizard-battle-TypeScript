@@ -5,7 +5,7 @@ const useLocalStorage = (key: string, defaultValue: null) => {
   // localStorage value in state
   const [localStorageValue, setLocalStorageValue] = useState(() => {
     try {
-      const value = localStorage.getItem(key);
+      const value: string | null = localStorage.getItem(key);
       // If value is already present in
       // localStorage then return it
 
@@ -24,9 +24,9 @@ const useLocalStorage = (key: string, defaultValue: null) => {
 
   // this method update our localStorage and our state
   const setLocalStorageStateValue = (valueOrFn: void) => {
-    let newValue;
+    let newValue: void | null;
     if (typeof valueOrFn === 'function') {
-      const fn = valueOrFn;
+      const fn: void | null = valueOrFn;
       newValue = fn(localStorageValue);
     } else {
       newValue = valueOrFn;

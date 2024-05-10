@@ -1,21 +1,14 @@
 import React, {
   useEffect, useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
-// import { useLocation } from "react-router-dom";
 import styles from "./Battle.module.css";
-// import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
 import PopupWithRedirect from "../../components/PopupWithRedirect/PopupWithRedirect.tsx";
 import getSpells from "../../services/spells.tsx";
 import { getWizzardById } from "../../services/wizzards.tsx";
 import BattleCard from "../../components/BattleCard/BattleCard.tsx";
 import useLocalStorage from "../../hooks/useLocalStorage.tsx";
-
-type Props = {
-  isOpenPopup: boolean,
-  // eslint-disable-next-line no-unused-vars
-  setIsOpenPopup: (arg: boolean) => void
-}
 
 type SpellObject = {
   id: string,
@@ -32,18 +25,17 @@ type SpellObject = {
   damageDiapason: string
 }
 
-const initialOpponentTurn = Math.floor(Math.random() * 2) ? "first" : "second";
+const initialOpponentTurn: string = Math.floor(Math.random() * 2) ? "first" : "second";
 
-const Battle: React.FC<Props> = ({
-  isOpenPopup,
-  setIsOpenPopup,
-}) => {
+const Battle: React.FC = () => {
   const [firstOpponent, setFirstOpponent] = useLocalStorage('firstOpponent', null);
   const [secondOpponent, setSecondOpponent] = useLocalStorage('secondOpponent', null);
+  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
 
-  const [spells, setSpells] = useState([]);
-  const [isOpponentMove, setisOpponentMove] = useState(initialOpponentTurn);
+  const [spells, setSpells] = useState<Array<SpellObject>>([]);
+  const [isOpponentMove, setisOpponentMove] = useState<string>(initialOpponentTurn);
 
+  const navigate = useNavigate();
   let winnerName = "";
 
   // const location = useLocation();
@@ -58,11 +50,6 @@ const Battle: React.FC<Props> = ({
     });
     getWizzardById(firstOpponent.id).then((res) => setFirstOpponent(res));
     getWizzardById(secondOpponent.id).then((res) => setSecondOpponent(res));
-    // if (location.pathname === "/battle") {
-    //   setIsBattleStarted(
-    //     localStorage.setItem("isBattleStarted", JSON.stringify(true)),
-    //   );
-    // }
   }, []);
 
   function getFirstOpponentSpell(spell: SpellObject) {
@@ -126,6 +113,12 @@ const Battle: React.FC<Props> = ({
   }
   showWinner();
   const closePopup = () => setIsOpenPopup(false);
+  const redirectAfterWin = () => {
+    navigate('/');
+    setFirstOpponent(null);
+    setSecondOpponent(null);
+    localStorage.removeItem("isBattleStarted");
+  };
   return (
     <>
       <section className={styles.battle}>
@@ -163,15 +156,10 @@ const Battle: React.FC<Props> = ({
       {isOpenPopup && (
         <PopupWithRedirect
           onClose={closePopup}
-          message={`Поздравляем, ${winnerName}, вы победили! Перенаправляем вас на главную страницу`}
+          onRedirect={redirectAfterWin}
+          message={`Congratulations, ${winnerName}, you win! We redirect you to the main page.`}
         />
       )}
-      {/* {isOpenPopup && (
-        <PopupWithMessage
-          setIsOpenPopup={setIsOpenPopup}
-          text={`Поздравляем, ${winnerName}, вы победили! Перенаправляем вас на главную страницу`}
-        ></PopupWithMessage>
-      )} */}
     </>
   );
 };

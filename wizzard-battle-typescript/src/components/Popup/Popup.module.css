@@ -5,15 +5,23 @@
     border: 1px solid rgba(255, 241, 163, 1);
     border-radius: 15px;
     z-index: 200;
-    position: fixed;
-    margin: auto auto;
-    left: 30%;
-    top: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
+  }
+
+  .popup__container {
+    width: 100%;
+    min-height: 100%;
+    z-index: 200;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
   }
 
   .popup__overlay {

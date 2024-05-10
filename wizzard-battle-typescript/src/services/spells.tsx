@@ -25,7 +25,7 @@ type FullSpell = SpellObject & SpellWithManaDamage
 
 export default function getSpells() {
   return axios.get(spellsUrl).then((res) => {
-    const filterSpells = res.data.filter(
+    const filterSpells: Array<FullSpell> = res.data.filter(
       (spell: SpellObject) => spell.type === 'Jinx' || spell.type === 'Curse',
     );
     filterSpells.map((spell: FullSpell) => {

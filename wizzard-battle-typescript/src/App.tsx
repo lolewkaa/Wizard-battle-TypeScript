@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SelectionButtons from './pages/SelectionButtons/SelectionButtons.tsx';
 import AutoSelect from './pages/AutoSelect/AutoSelect.tsx';
@@ -7,10 +7,7 @@ import Battle from './pages/Battle/Battle.tsx';
 import Feedback from './pages/Feedback/Feedback.tsx';
 import Layout from './components/Layout/Layout.tsx';
 
-const App: React.FC = () => {
-  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
-
-  return (
+const App: React.FC = () => (
     <Layout>
        <Routes>
         <Route
@@ -24,8 +21,6 @@ const App: React.FC = () => {
             path="/auto-selection"
             element={
               <AutoSelect
-                isOpenPopup={isOpenPopup}
-                setIsOpenPopup={setIsOpenPopup}
               />
             }
             />
@@ -33,8 +28,6 @@ const App: React.FC = () => {
             path="/manual-selection"
             element={
               <IndependentSelect
-                isOpenPopup={isOpenPopup}
-                setIsOpenPopup={setIsOpenPopup}
               />
             }
           />
@@ -42,14 +35,11 @@ const App: React.FC = () => {
             path="/battle"
             element={
               <Battle
-                isOpenPopup={isOpenPopup}
-                setIsOpenPopup={setIsOpenPopup}
               />
             }
           />
           <Route path="/feedback" element={<Feedback />} />
        </Routes>
        </Layout>
-  );
-};
+);
 export default App;

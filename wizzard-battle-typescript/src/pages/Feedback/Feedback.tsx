@@ -3,15 +3,18 @@ import classNames from 'classnames';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import styles from './Feedback.module.css';
-import StarRate from '../../components/ui/StarRate.tsx';
+import StarRate from '../../components/ui/StarRate/StarRate.tsx';
+import Input from '../../components/ui/Input/Input.tsx';
+import Checkbox from '../../components/ui/Checkbox/Checkbox.tsx';
+import Button from '../../components/ui/Button/Button.tsx';
 
 const Feedback: React.FC = () => {
-  const [agreeCheckboxChecked, setAgreeCheckboxChecked] = useState(false);
-  const [connectionCheckboxChecked, setConnectionCheckboxChecked] = useState(false);
-  const [isLowRating, setIsLowRating] = useState(false);
+  const [agreeCheckboxChecked, setAgreeCheckboxChecked] = useState<boolean>(false);
+  const [connectionCheckboxChecked, setConnectionCheckboxChecked] = useState<boolean>(false);
+  const [isLowRating, setIsLowRating] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<null | number>(null);
-  const [, setHoverItem] = useState(0);
-  const stars = Array(5).fill(0);
+  const [, setHoverItem] = useState<number>(0);
+  const stars: Array<number> = Array(5).fill(0);
 
   useEffect(() => {
     if (currentItem !== null && currentItem < 3) {
@@ -62,19 +65,15 @@ const Feedback: React.FC = () => {
             dirty,
           }) => (
             <div className={styles.feedBack__container}>
-              <label className={styles.feedBack__text} htmlFor={'name'}>Name</label>
-              <input
+              <Input
                 type={'text'}
                 name={'name'}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.name}
-                className={styles.feedBack__input}
               />
               {touched.name && errors.name && <p className={styles.feedBack__err}>{errors.name}</p>}
-              <label className={styles.feedBack__text} htmlFor={'email'}>E-mail</label>
-              <input
-                className={styles.feedBack__input}
+              <Input
                 type={'email'}
                 name={'email'}
                 onChange={handleChange}
@@ -94,45 +93,43 @@ const Feedback: React.FC = () => {
                   stars={stars}
                   setCurrentItem={setCurrentItem}
                   />
-                <label className={styles.feedBack__text} htmlFor={'comment'}>Comment</label>
-              <input
-                className={styles.feedBack__comment}
+                  <Input
                 type={'comment'}
                 name={'comment'}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.comment}
               />
-          <div className={styles.feedBack__checkBoxContainer}>
-            <input className={styles.feedBack__checkBoxInput} type="checkbox" checked={agreeCheckboxChecked} onChange={() => setAgreeCheckboxChecked(!agreeCheckboxChecked)}/>
-            <h2 className={styles.feedBack__text}>
-            Consent to personal data processing
-            </h2>
-          </div>
+            <Checkbox
+            text={'Consent to personal data processing'}
+            type={"checkbox"}
+            checked={agreeCheckboxChecked}
+            onChange={() => setAgreeCheckboxChecked(!agreeCheckboxChecked)}
+            />
           {isLowRating && <>
           <h2 className={styles.feedBack__subtitle}>We are sorry that you did not like the game.
             We would like to be better. If you have a problem while playing or have any ideas,
             how to make it better, describe everything in the comments.
             If you would like us to contact you, please check the “Contact me” box.</h2>
-            <div className={styles.feedBack__checkBoxContainer}>
-              <input className={styles.feedBack__checkBoxInput} type="checkbox" checked={connectionCheckboxChecked} onChange={() => setConnectionCheckboxChecked(!connectionCheckboxChecked)} />
-              <h2 className={styles.feedBack__text}>
-              Contact me
-              </h2>
-            </div></>
+            <Checkbox
+            text={'Contact me'}
+            type={"checkbox"}
+            checked={connectionCheckboxChecked}
+            onChange={() => setConnectionCheckboxChecked(!connectionCheckboxChecked)}
+            />
+            </>
              }
                 </div>
               }
-              <button
-              className={classNames(styles.feedBack__button, {
+              <Button
+              buttonStyle={classNames(styles.feedBack__button, {
                 [styles.disable]: !isValid,
               })}
               disabled={!isValid && !dirty}
-              onClick={() => handleSubmit()}
+              clickButton={() => handleSubmit()}
               type={'submit'}
-              >
-                Send
-              </button>
+              text='Send'
+              />
             </div>
           )}
         </Formik>

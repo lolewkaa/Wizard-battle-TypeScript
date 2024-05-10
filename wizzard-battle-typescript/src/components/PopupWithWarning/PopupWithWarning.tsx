@@ -1,13 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./PopupWithWarning.module.css";
+import Popup from "../Popup/Popup.tsx";
+import Button from "../ui/Button/Button.tsx";
 
 type Props = {
     // eslint-disable-next-line no-unused-vars
-    setIsOpenPopupWarning: (arg: boolean) => void
+    setIsOpenPopupWarning: (arg: boolean) => void,
+    message: string,
   }
 
-const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning }) => {
+const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning, message }) => {
   const navigate = useNavigate();
   function removeLocalStorage() {
     localStorage.removeItem("secondOpponentId");
@@ -22,19 +25,19 @@ const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning }) => {
   }
   return (
     <>
-      <div onClick={removeLocalStorage} className={styles.popup__overlay}></div>
-      <div className={styles.popup}>
-        <h2 className={styles.popup__text}>
-          Are you sure you want to leave the battle page? All changes will be
-          deleted.
-        </h2>
-        <button onClick={removeLocalStorage} className={styles.popup__close}>
-          Yes
-        </button>
-        <button onClick={redirectToTheBattle} className={styles.popup__close}>
-          No
-        </button>
-      </div>
+    <Popup onClose={removeLocalStorage}>
+      <h2 className={styles.popup__text}>{message}</h2>
+      <Button
+        clickButton={removeLocalStorage}
+        buttonStyle={styles.popup__close}
+        text="Yes"
+      />
+      <Button
+        clickButton={redirectToTheBattle}
+        buttonStyle={styles.popup__close}
+        text="No"
+      />
+    </Popup>
     </>
   );
 };

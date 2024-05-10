@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './StarRate.module.css';
-import inactiveStar from '../../assets/images/heart_3hgfdgqrwsv4.svg';
-import activeStart from '../../assets/images/heart_3hgfdgqrwsv4 (1).svg';
+import inactiveStar from '../../../assets/images/heart_3hgfdgqrwsv4.svg';
+import activeStart from '../../../assets/images/heart_3hgfdgqrwsv4 (1).svg';
 
 type Props = {
     currentItem: number | null,

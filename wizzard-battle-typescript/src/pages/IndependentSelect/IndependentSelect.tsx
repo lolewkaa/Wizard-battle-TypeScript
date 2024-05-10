@@ -1,18 +1,14 @@
 import React, {
   useState, useEffect,
 } from 'react';
+import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
 import styles from './IndependentSelect.module.css';
 import Card from '../../components/Card/Card.tsx';
-import PopupWithMessage from '../../components/PopupWithMessage/PopupWithMessage.tsx';
+import PopupWithRedirect from '../../components/PopupWithRedirect/PopupWithRedirect.tsx';
 import { getWizzards } from '../../services/wizzards.tsx';
 import useLocalStorage from '../../hooks/useLocalStorage.tsx';
-
-type Props = {
-    isOpenPopup: boolean,
-    // eslint-disable-next-line no-unused-vars
-    setIsOpenPopup: (arg: boolean) => void
-}
+import Button from '../../components/ui/Button/Button.tsx';
 
 type WizardObject = {
     id: string,
@@ -20,11 +16,14 @@ type WizardObject = {
     lastName: string,
 }
 
-const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => {
-  const [isDisableButton, setIsDisableButton] = useState(false);
+const IndependentSelect: React.FC = () => {
+  const [isDisableButton, setIsDisableButton] = useState<boolean>(false);
   const [firstOpponent, setFirstOpponent] = useLocalStorage('firstOpponent', null);
   const [secondOpponent, setSecondOpponent] = useLocalStorage('secondOpponent', null);
-  const [wizzardsData, setWizzardsData] = useState([]);
+  const [wizzardsData, setWizzardsData] = useState<Array<WizardObject>>([]);
+  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getWizzards()
@@ -53,6 +52,11 @@ const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => 
   useEffect(() => {
     setIsDisableButton(firstOpponent === null || secondOpponent === null);
   }, [firstOpponent, secondOpponent]);
+
+  const closePopup = () => setIsOpenPopup(false);
+  const redirectAfterWin = () => {
+    navigate('/battle');
+  };
   return (
           <>
             <section className={styles.manual}>
@@ -67,11 +71,14 @@ const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => 
                       lastName={wizzard.lastName}
                     />))}
                 </div>
-                <button
-                onClick={openPopup}
+                <Button
+                clickButton={openPopup}
                 disabled={isDisableButton}
-                className={classNames(styles.manual__button, { [styles.disable]: isDisableButton })}
-                >Action!</button>
+                text={'Action!'}
+                buttonStyle={
+                  classNames(styles.manual__button, { [styles.disable]: isDisableButton })
+                }
+                />
                 <div className={styles.manual__container}>
                 {wizzardsData.map((wizzard: WizardObject) => (
                     <Card
@@ -84,7 +91,13 @@ const IndependentSelect: React.FC<Props> = ({ setIsOpenPopup, isOpenPopup }) => 
                 </div>
               </div>
             </section>
-            {isOpenPopup && <PopupWithMessage setIsOpenPopup={setIsOpenPopup} text='Redirect to the battle page'></PopupWithMessage>}
+            {isOpenPopup && (
+        <PopupWithRedirect
+          onClose={closePopup}
+          onRedirect={redirectAfterWin}
+          message="Redirect to the battle page"
+        />
+            )}
           </>
   );
 };

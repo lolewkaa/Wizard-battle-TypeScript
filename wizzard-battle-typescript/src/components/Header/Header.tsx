@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
-import Button from '../Button/Button.tsx';
+import Button from '../ui/Button/Button.tsx';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
