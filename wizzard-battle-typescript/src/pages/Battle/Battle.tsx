@@ -1,8 +1,6 @@
-import React, {
-  useEffect, useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import classNames from 'classnames';
+import classNames from "classnames";
 import styles from "./Battle.module.css";
 import PopupWithRedirect from "../../components/PopupWithRedirect/PopupWithRedirect.tsx";
 import getSpells from "../../services/spells.tsx";
@@ -11,32 +9,41 @@ import BattleCard from "../../components/BattleCard/BattleCard.tsx";
 import useLocalStorage from "../../hooks/useLocalStorage.tsx";
 
 type SpellObject = {
-  id: string,
-  name: string,
-  incantation: string,
-  effect: string,
-  canBeVerbal: boolean,
-  type: string,
-  light: string,
-  creator: null,
-  damage: number,
-  mana: number,
-  manaDiapason: string,
-  damageDiapason: string
-}
+  id: string;
+  name: string;
+  incantation: string;
+  effect: string;
+  canBeVerbal: boolean;
+  type: string;
+  light: string;
+  creator: null;
+  damage: number;
+  mana: number;
+  manaDiapason: string;
+  damageDiapason: string;
+};
 
-const initialOpponentTurn: string = Math.floor(Math.random() * 2) ? "first" : "second";
+const initialOpponentTurn: string = Math.floor(Math.random() * 2)
+  ? "first"
+  : "second";
 
 const Battle: React.FC = () => {
-  const [firstOpponent, setFirstOpponent] = useLocalStorage('firstOpponent', null);
-  const [secondOpponent, setSecondOpponent] = useLocalStorage('secondOpponent', null);
+  const [firstOpponent, setFirstOpponent] = useLocalStorage(
+    "firstOpponent",
+    null,
+  );
+  const [secondOpponent, setSecondOpponent] = useLocalStorage(
+    "secondOpponent",
+    null,
+  );
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
 
-  const [spells, setSpells] = useState<Array<SpellObject>>([]);
+  const [spells, setSpells] = useState([]);
   const [isOpponentMove, setisOpponentMove] = useState<string>(initialOpponentTurn);
+  const [winnerName, setWinnerName] = useState("");
 
   const navigate = useNavigate();
-  let winnerName = "";
+  // let winnerName = "";
 
   // const location = useLocation();
 
@@ -90,31 +97,31 @@ const Battle: React.FC = () => {
         firstOpponent.firstName = "";
       }
       setIsOpenPopup(true);
-      winnerName = `${firstOpponent.firstName} ${firstOpponent.lastName}`;
+      setWinnerName(`${firstOpponent.firstName} ${firstOpponent.lastName}`);
     } else if (firstOpponent.manaPoints <= 0) {
       if (secondOpponent.firstName === null) {
         secondOpponent.firstName = "";
       }
       setIsOpenPopup(true);
-      winnerName = `${secondOpponent.firstName} ${secondOpponent.lastName}`;
+      setWinnerName(`${secondOpponent.firstName} ${secondOpponent.lastName}`);
     } else if (firstOpponent.healthPoints <= 0) {
       if (secondOpponent.firstName === null) {
         secondOpponent.firstName = "";
       }
       setIsOpenPopup(true);
-      winnerName = `${secondOpponent.firstName} ${secondOpponent.lastName}`;
+      setWinnerName(`${secondOpponent.firstName} ${secondOpponent.lastName}`);
     } else if (secondOpponent.healthPoints <= 0) {
       if (firstOpponent.firstName === null) {
         firstOpponent.firstName = "";
       }
       setIsOpenPopup(true);
-      winnerName = `${firstOpponent.firstName} ${firstOpponent.lastName}`;
+      setWinnerName(`${firstOpponent.firstName} ${firstOpponent.lastName}`);
     }
   }
   showWinner();
   const closePopup = () => setIsOpenPopup(false);
   const redirectAfterWin = () => {
-    navigate('/');
+    navigate("/");
     setFirstOpponent(null);
     setSecondOpponent(null);
     localStorage.removeItem("isBattleStarted");
@@ -123,7 +130,7 @@ const Battle: React.FC = () => {
     <>
       <section className={styles.battle}>
         <div className={styles.battle__textBox}>
-        <h1
+          <h1
             className={classNames(styles.battle__text, {
               [styles.disable]: isOpponentMove === "first",
             })}
@@ -139,18 +146,18 @@ const Battle: React.FC = () => {
           </h1>
         </div>
         <div className={styles.battle__containers}>
-            <BattleCard
-              opponentData={firstOpponent}
-              spells={spells}
-              useSpell={getFirstOpponentSpell}
-              isOpponentTurn={isOpponentMove === 'second'}
-            />
-            <BattleCard
-              opponentData={secondOpponent}
-              spells={spells}
-              useSpell={getSecondOpponentSpell}
-              isOpponentTurn={isOpponentMove === 'first'}
-            />
+          <BattleCard
+            opponentData={firstOpponent}
+            spells={spells}
+            useSpell={getFirstOpponentSpell}
+            isOpponentTurn={isOpponentMove === "second"}
+          />
+          <BattleCard
+            opponentData={secondOpponent}
+            spells={spells}
+            useSpell={getSecondOpponentSpell}
+            isOpponentTurn={isOpponentMove === "first"}
+          />
         </div>
       </section>
       {isOpenPopup && (

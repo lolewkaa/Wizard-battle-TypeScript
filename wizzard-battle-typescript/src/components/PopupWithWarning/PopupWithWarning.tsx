@@ -4,13 +4,16 @@ import styles from "./PopupWithWarning.module.css";
 import Popup from "../Popup/Popup.tsx";
 import Button from "../ui/Button/Button.tsx";
 
-type Props = {
-    // eslint-disable-next-line no-unused-vars
-    setIsOpenPopupWarning: (arg: boolean) => void,
-    message: string,
-  }
+type PropsPopupWithWarning = {
+  // eslint-disable-next-line no-unused-vars
+  setIsOpenPopupWarning: (arg: boolean) => void;
+  message: string;
+};
 
-const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning, message }) => {
+const PopupWithWarning: React.FC<PropsPopupWithWarning> = ({
+  setIsOpenPopupWarning,
+  message,
+}) => {
   const navigate = useNavigate();
   function removeLocalStorage() {
     localStorage.removeItem("secondOpponentId");
@@ -24,7 +27,6 @@ const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning, message }) =
     setIsOpenPopupWarning(false);
   }
   return (
-    <>
     <Popup onClose={removeLocalStorage}>
       <h2 className={styles.popup__text}>{message}</h2>
       <Button
@@ -38,7 +40,6 @@ const PopupWithWarning: React.FC<Props> = ({ setIsOpenPopupWarning, message }) =
         text="No"
       />
     </Popup>
-    </>
   );
 };
 

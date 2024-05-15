@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Counter.module.css';
+import React, { useEffect, useState } from "react";
+import styles from "./Counter.module.css";
 
-type Props = {
-    onStop: () => void,
-}
+type PropsCounter = {
+  onStop: () => void;
+};
 
-const Counter: React.FC<Props> = ({ onStop }) => {
+const Counter: React.FC<PropsCounter> = ({ onStop }) => {
   const useCountDown = (initialSeconds: number) => {
     const [seconds, setSeconds] = useState<number>(initialSeconds);
     const countDown = () => {
@@ -31,9 +31,7 @@ const Counter: React.FC<Props> = ({ onStop }) => {
 
   const { seconds } = useCountDown(5);
 
-  return (
-        <h3 className={styles.popup__title}>{seconds}</h3>
-  );
+  return <h3 className={styles.popup__title}>{seconds}</h3>;
 };
 
 export default Counter;
