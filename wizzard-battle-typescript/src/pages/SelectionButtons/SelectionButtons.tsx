@@ -1,37 +1,49 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './SelectionButtons.module.css';
-import Button from '../../components/Button/Button.tsx';
-import backgroundWood from '../../assets/images/Background.jpg';
-import stars from '../../assets/images/stars.png';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./SelectionButtons.module.css";
+import Button from "../../components/ui/Button/Button.tsx";
+import backgroundWood from "../../assets/images/Background.jpg";
+import stars from "../../assets/images/stars.png";
 
 const SelectionButtons: React.FC = () => {
   const navigate = useNavigate();
 
   function autoSelection() {
-    navigate('/auto-selection');
+    navigate("/auto-selection");
   }
 
   function manualSelection() {
-    navigate('/manual-selection');
-    // localStorage.removeItem("secondOpponentId");
-    // localStorage.removeItem("firstOpponentId");
+    navigate("/manual-selection");
   }
   return (
-        <section className={styles.selection}>
-        <div className={styles.selection__mainContainer}>
+    <section className={styles.selection}>
+      <div className={styles.selection__mainContainer}>
         <h1 className={styles.section__title}>Get closer to the magic</h1>
-        <img src={backgroundWood} alt='Dark sky with moon' className={styles.selection__image}/>
-        <img src={stars} alt='Stars' className={styles.selection__imageStars}/>
+        <img
+          src={backgroundWood}
+          alt="Dark sky with moon"
+          className={styles.selection__image}
+        />
+        <img src={stars} alt="Stars" className={styles.selection__imageStars} />
         <div className={styles.section__box}>
-          <h2 className={styles.section__subtitle}>You can choose manual or automatic selection</h2>
+          <h2 className={styles.section__subtitle}>
+            You can choose manual or automatic selection
+          </h2>
           <div className={styles.selection__container}>
-            <Button buttonStyle={styles.selection__button} clickButton={manualSelection} text='Manual'/>
-            <Button buttonStyle={styles.selection__button} clickButton={autoSelection} text='Automatically'/>
+            <Button
+              buttonStyle={styles.selection__button}
+              clickButton={manualSelection}
+              text="Manual"
+            />
+            <Button
+              buttonStyle={styles.selection__button}
+              clickButton={autoSelection}
+              text="Automatically"
+            />
           </div>
         </div>
-        </div>
-      </section>
+      </div>
+    </section>
   );
 };
 export default SelectionButtons;

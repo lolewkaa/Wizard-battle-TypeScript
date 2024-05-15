@@ -1,0 +1,24 @@
+.checkBoxContainer {
+    display: flex;
+    justify-content: flex-start;
+    width: 390px;
+    align-items: center;
+    margin: 10px 0 10px 0;
+}
+
+.checkBoxInput {
+    background-color: black;
+    border: 1px solid rgba(255, 241, 163, 1);
+    color: rgba(255, 241, 163, 1);
+    margin-right: 15px;
+  }
+
+  .text {
+    font-size: 20px;
+    color: rgba(255, 241, 163, 1);
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.1;
+  }

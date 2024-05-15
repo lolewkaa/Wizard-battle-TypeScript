@@ -1,6 +1,6 @@
 .feedBack {
     max-width: 100%;
-    min-height: 700px;
+    height: calc(100vh - 122px);
     display: flex;
     justify-content: center;
     align-items: center;

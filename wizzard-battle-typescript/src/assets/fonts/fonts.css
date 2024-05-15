@@ -13,11 +13,11 @@
   @font-face {
     font-family: "Averia Serif Libre";
     font-weight: normal;
-    src: url(../../src/fonts/AveriaSerifLibre-Regular.ttf);
+    src: url(../fonts/AveriaSerifLibre-Regular.ttf);
   }
 
   @font-face {
     font-family: "Montserrat";
     font-weight: 300;
-    src: url(../../src/fonts/Montserrat-Light.ttf);
+    src: url(../fonts/Montserrat-Light.ttf);
   }

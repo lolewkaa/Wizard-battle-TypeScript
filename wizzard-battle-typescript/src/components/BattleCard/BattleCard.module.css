@@ -1,23 +1,26 @@
 .battle {
     width: 1240px;
-    margin: 0 auto 0 auto;
+    margin: 0 auto 30px auto;
     display: flex;
     flex-direction: column;
     background-image: url('../../assets/images/stars.png');
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: calc(100vh - 122px);
   }
   
   .battle__container {
     max-width: 600px;
-   display: flex;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .battle__container:first-child {
+    flex-direction: row-reverse;
   }
   
   .battle__containers {
     display: flex;
     justify-content: space-between;
-    margin: 0 5px 30px 5px;
   }
   
   .battle__healthLine {

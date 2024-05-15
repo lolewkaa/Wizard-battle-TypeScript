@@ -1,41 +1,32 @@
-import React, {
-  useEffect, useState, SetStateAction, Dispatch,
-} from "react";
-import classNames from 'classnames';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 import styles from "./AutoSelect.module.css";
 import Card from "../../components/Card/Card.tsx";
-import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
-import { getWizzards } from '../../services/wizzards.tsx';
-import { getRandomWizzard } from '../../utils/utils.tsx';
+// import PopupWithMessage from "../../components/PopupWithMessage/PopupWithMessage.tsx";
+import PopupWithRedirect from "../../components/PopupWithRedirect/PopupWithRedirect.tsx";
+import { getWizzards } from "../../services/wizzards.tsx";
+import { getRandomWizzard } from "../../utils/utils.tsx";
+import useLocalStorage from "../../hooks/useLocalStorage.tsx";
+import Button from "../../components/ui/Button/Button.tsx";
 
-type Props = {
-    isOpenPopup: boolean,
-    setIsOpenPopup: Dispatch<SetStateAction<boolean>>
-}
-
-const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
-  const [isDisableButton, setIsDisableButton] = useState(false);
-  const [wizzardsData, setWizzardsData] = useState([]);
-  const firstOpponentJson = localStorage.getItem('firstOpponentId');
-  const secondOpponentJson = localStorage.getItem('secondOpponentId');
-
-  const [firstOpponent, setFirstOpponent] = useState(
-    firstOpponentJson ? JSON.parse(firstOpponentJson) : null,
+const AutoSelect: React.FC = () => {
+  const [isDisableButton, setIsDisableButton] = useState<boolean>(false);
+  const [wizzardsData, setWizzardsData] = useState<Array<number>>([]);
+  const [firstOpponent, setFirstOpponent] = useLocalStorage(
+    "firstOpponent",
+    null,
   );
-  const [secondOpponent, setSecondOpponent] = useState(
-    secondOpponentJson ? JSON.parse(secondOpponentJson) : null,
+  const [secondOpponent, setSecondOpponent] = useLocalStorage(
+    "secondOpponent",
+    null,
   );
+  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("firstOpponentId") !== undefined) {
-      setFirstOpponent(firstOpponentJson ? JSON.parse(firstOpponentJson) : null);
-    }
-    if (localStorage.getItem('secondOpponentId') !== undefined) {
-      setFirstOpponent(secondOpponentJson ? JSON.parse(secondOpponentJson) : null);
-    }
-    localStorage.setItem('opponentsFrom', JSON.stringify('autoSelect'));
-    getWizzards()
-      .then((res) => setWizzardsData(res));
+    getWizzards().then((res) => setWizzardsData(res));
   }, []);
 
   const handleFindFighters = () => {
@@ -46,57 +37,60 @@ const AutoSelect: React.FC<Props> = ({ isOpenPopup, setIsOpenPopup }) => {
     }, 200);
     setTimeout(() => {
       clearInterval(animation);
-      setFirstOpponent((getRandomWizzard(wizzardsData)));
+      setFirstOpponent(getRandomWizzard(wizzardsData));
       setSecondOpponent(getRandomWizzard(wizzardsData));
       setIsDisableButton(false);
     }, 3000);
   };
 
-  useEffect(() => {
-    localStorage.setItem('firstOpponentId', JSON.stringify(firstOpponent));
-  }, [firstOpponent]);
-
-  useEffect(() => {
-    localStorage.setItem('secondOpponentId', JSON.stringify(secondOpponent));
-  }, [secondOpponent]);
   function openPopup() {
     setIsOpenPopup(true);
   }
+
+  const closePopup = () => setIsOpenPopup(false);
+  const redirectAfterWin = () => {
+    navigate("/battle");
+  };
   return (
+    <>
       <section className={styles.auto}>
-      <div className={styles.auto__box}>
-      <Card
-        name={firstOpponent?.firstName}
-        lastName={firstOpponent?.lastName}
-      />
-      <div className={styles.auto__container}>
-        <button
-          className={classNames(styles.auto__button, { [styles.disable]: isDisableButton })}
-          onClick={handleFindFighters}
-          disabled={isDisableButton}
-        >
-          Find opponents
-        </button>
-        <button
-          className={classNames(styles.auto__button, { [styles.disable]: isDisableButton })}
-          disabled={isDisableButton}
-          onClick={openPopup}
-        >
-          Action!
-        </button>
-      </div>
-      <Card
-        name={secondOpponent?.firstName}
-        lastName={secondOpponent?.lastName}
-      />
-      </div>
+        <div className={styles.auto__box}>
+          <Card
+            name={firstOpponent?.firstName}
+            lastName={firstOpponent?.lastName}
+          />
+          <div className={styles.auto__container}>
+            <Button
+              buttonStyle={classNames(styles.auto__button, {
+                [styles.disable]: isDisableButton,
+              })}
+              clickButton={handleFindFighters}
+              disabled={isDisableButton}
+              text="Find opponents"
+            />
+            <Button
+              buttonStyle={classNames(styles.auto__button, {
+                [styles.disable]: isDisableButton,
+              })}
+              clickButton={openPopup}
+              disabled={isDisableButton}
+              text="Action!"
+            />
+          </div>
+          <Card
+            name={secondOpponent?.firstName}
+            lastName={secondOpponent?.lastName}
+          />
+        </div>
+      </section>
       {isOpenPopup && (
-        <PopupWithMessage
-          setIsOpenPopup={setIsOpenPopup}
-          text="Redirect to the battle page"
-        ></PopupWithMessage>
+        <PopupWithRedirect
+          onClose={closePopup}
+          onRedirect={redirectAfterWin}
+          message="Redirect to the battle page"
+        />
       )}
-    </section>
+    </>
   );
 };
 
