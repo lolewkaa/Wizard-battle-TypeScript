@@ -7,12 +7,7 @@ import PopupWithRedirect from "../../components/PopupWithRedirect/PopupWithRedir
 import { getWizzards } from "../../services/wizzards.tsx";
 import useLocalStorage from "../../hooks/useLocalStorage.tsx";
 import Button from "../../components/ui/Button/Button.tsx";
-
-type WizardObject = {
-  id: string;
-  firstName: string;
-  lastName: string;
-};
+import { WizardObject } from "../../types/types.ts";
 
 const IndependentSelect: React.FC = () => {
   const [isDisableButton, setIsDisableButton] = useState<boolean>(false);

@@ -1,27 +1,8 @@
 import axios from "axios";
 import { getRandomInt } from "../utils/utils.tsx";
+import { SpellObject, FullSpell } from "../types/types.ts";
 
 const spellsUrl = "https://wizard-world-api.herokuapp.com/Spells";
-
-type SpellObject = {
-  id: number;
-  name: string;
-  incantation: string;
-  effect: string;
-  canBeVerbal: boolean;
-  type: string;
-  light: string;
-  creator: null;
-};
-
-type SpellWithManaDamage = {
-  damage: number;
-  mana: number;
-  manaDiapason: string;
-  damageDiapason: string;
-};
-
-type FullSpell = SpellObject & SpellWithManaDamage;
 
 export default function getSpells() {
   return axios.get(spellsUrl).then((res) => {

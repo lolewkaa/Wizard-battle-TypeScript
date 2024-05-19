@@ -7,21 +7,7 @@ import getSpells from "../../services/spells.tsx";
 import { getWizzardById } from "../../services/wizzards.tsx";
 import BattleCard from "../../components/BattleCard/BattleCard.tsx";
 import useLocalStorage from "../../hooks/useLocalStorage.tsx";
-
-type SpellObject = {
-  id: string;
-  name: string;
-  incantation: string;
-  effect: string;
-  canBeVerbal: boolean;
-  type: string;
-  light: string;
-  creator: null;
-  damage: number;
-  mana: number;
-  manaDiapason: string;
-  damageDiapason: string;
-};
+import { SpellObject } from "../../types/types.ts";
 
 const initialOpponentTurn: string = Math.floor(Math.random() * 2)
   ? "first"

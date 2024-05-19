@@ -1,14 +1,7 @@
 import axios from "axios";
+import { Wizard } from "../types/types.ts";
 
 const wizzardsUrl = "https://wizard-world-api.herokuapp.com/Wizards";
-
-interface Wizard {
-  id: string;
-  firstName: string;
-  lastName: string;
-  healthPoints: number;
-  manaPoints: number;
-}
 
 export const getWizzards = () => axios.get(wizzardsUrl).then((res) => res.data);
 

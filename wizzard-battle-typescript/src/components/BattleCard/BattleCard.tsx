@@ -4,28 +4,7 @@ import { useSpring, animated } from "react-spring";
 import styles from "./BattleCard.module.css";
 import Card from "../Card/Card.tsx";
 import Spell from "../Spell/Spell.tsx";
-
-type Opponent = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  healthPoints: number;
-  manaPoints: number;
-};
-type SpellObject = {
-  id: string;
-  name: string;
-  incantation: string;
-  effect: string;
-  canBeVerbal: boolean;
-  type: string;
-  light: string;
-  creator: null;
-  damage: number;
-  mana: number;
-  manaDiapason: string;
-  damageDiapason: string;
-};
+import { SpellObject, Opponent } from "../../types/types.ts";
 
 type PropsBattleCard = {
   spells: Array<SpellObject>;
