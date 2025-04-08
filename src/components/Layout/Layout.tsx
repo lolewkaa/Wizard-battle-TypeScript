@@ -30,7 +30,7 @@ const Layout: React.FC<PropsLayout> = ({ children }) => {
       <Header />
       <main className={styles.page}>{children}</main>
       <Footer />
-      {isOpenPopupWarning && (
+      {isOpenPopupWarning && localStorage.getItem("isBattleStarted") && (
         <PopupWithWarning
           setIsOpenPopupWarning={setIsOpenPopupWarning}
           message="Are you sure you want to leave the battle page? All changes will be

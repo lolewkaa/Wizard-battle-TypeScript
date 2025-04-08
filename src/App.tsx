@@ -4,8 +4,8 @@ import SelectionButtons from "./pages/SelectionButtons/SelectionButtons.tsx";
 import AutoSelect from "./pages/AutoSelect/AutoSelect.tsx";
 import IndependentSelect from "./pages/IndependentSelect/IndependentSelect.tsx";
 import Battle from "./pages/Battle/Battle.tsx";
-import Feedback from "./pages/Feedback/Feedback.tsx";
 import Layout from "./components/Layout/Layout.tsx";
+import Feedback from "./pages/Feedback/Feedback.tsx";
 
 const App: React.FC = () => (
   <Layout>

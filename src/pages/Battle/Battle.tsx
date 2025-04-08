@@ -24,14 +24,11 @@ const Battle: React.FC = () => {
   );
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
 
-  const [spells, setSpells] = useState([]);
+  const [spells, setSpells] = useState<SpellObject[]>([]);
   const [isOpponentMove, setisOpponentMove] = useState<string>(initialOpponentTurn);
   const [winnerName, setWinnerName] = useState("");
 
   const navigate = useNavigate();
-  // let winnerName = "";
-
-  // const location = useLocation();
 
   useEffect(() => {
     getSpells().then((res) => {
@@ -77,37 +74,34 @@ const Battle: React.FC = () => {
     }
   }
 
-  function showWinner() {
-    if (secondOpponent.manaPoints <= 0) {
-      if (firstOpponent.firstName === null) {
-        firstOpponent.firstName = "";
+  function checkWinner() {
+    if (
+      secondOpponent.healthPoints <= 0
+      || firstOpponent.healthPoints <= 0
+      || secondOpponent.manaPoints <= 0
+      || firstOpponent.manaPoints <= 0
+    ) {
+      if (secondOpponent.healthPoints <= 0 || secondOpponent.manaPoints <= 0) {
+        setWinnerName(`${firstOpponent.firstName} ${firstOpponent.lastName}`);
+      } else {
+        setWinnerName(`${secondOpponent.firstName} ${secondOpponent.lastName}`);
       }
       setIsOpenPopup(true);
-      setWinnerName(`${firstOpponent.firstName} ${firstOpponent.lastName}`);
-    } else if (firstOpponent.manaPoints <= 0) {
-      if (secondOpponent.firstName === null) {
-        secondOpponent.firstName = "";
-      }
-      setIsOpenPopup(true);
-      setWinnerName(`${secondOpponent.firstName} ${secondOpponent.lastName}`);
-    } else if (firstOpponent.healthPoints <= 0) {
-      if (secondOpponent.firstName === null) {
-        secondOpponent.firstName = "";
-      }
-      setIsOpenPopup(true);
-      setWinnerName(`${secondOpponent.firstName} ${secondOpponent.lastName}`);
-    } else if (secondOpponent.healthPoints <= 0) {
-      if (firstOpponent.firstName === null) {
-        firstOpponent.firstName = "";
-      }
-      setIsOpenPopup(true);
-      setWinnerName(`${firstOpponent.firstName} ${firstOpponent.lastName}`);
     }
   }
-  showWinner();
+
+  useEffect(() => {
+    checkWinner();
+  }, [
+    firstOpponent.healthPoints,
+    secondOpponent.healthPoints,
+    firstOpponent.manaPoints,
+    secondOpponent.manaPoints,
+  ]);
+
   const closePopup = () => setIsOpenPopup(false);
   const redirectAfterWin = () => {
-    navigate("/");
+    navigate("/feedback");
     setFirstOpponent(null);
     setSecondOpponent(null);
     localStorage.removeItem("isBattleStarted");
@@ -150,7 +144,7 @@ const Battle: React.FC = () => {
         <PopupWithRedirect
           onClose={closePopup}
           onRedirect={redirectAfterWin}
-          message={`Congratulations, ${winnerName}, you win! We redirect you to the main page.`}
+          message={`Congratulations, ${winnerName}, you win! We redirect you to another page to fill out the feedback form.`}
         />
       )}
     </>

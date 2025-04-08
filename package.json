@@ -2,6 +2,7 @@
   "name": "wizzard-battle-typescript",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lolewkaa.github.io/Wizard-battle-TypeScript",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -29,7 +30,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +54,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.2",
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "gh-pages": "^6.3.0"
   }
 }
