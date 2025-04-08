@@ -2,7 +2,7 @@
   "name": "wizzard-battle-typescript",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lolewkaa.github.io/Wizard-battle-TypeScript",
+  "homepage": "https://lolewkaa.github.io/Wizzard-battle-TypeScript",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

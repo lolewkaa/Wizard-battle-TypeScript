@@ -1,6 +1,6 @@
 
 # Pet-project to practice skills:  
- ## demonstration: [gh pages](https://lolewkaa.github.io/Wizard-battle-TypeScript/ "wizard-battle")
+ ## demonstration: [gh pages](https://lolewkaa.github.io/Wizzard-battle-TypeScript/ "wizard-battle")
 
 * React
 * TypeScript
