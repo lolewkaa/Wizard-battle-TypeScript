@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-     <BrowserRouter basename="/Wizzard-battle-TypeScript">
+     <BrowserRouter basename="/Wizard-battle-TypeScript">
       <App />
     </BrowserRouter>,
 );
