@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Wizzard-battle-TypeScript/static/css/main.d3168d0c.css",
-    "main.js": "/Wizzard-battle-TypeScript/static/js/main.4582166a.js",
-    "static/js/453.814c0e13.chunk.js": "/Wizzard-battle-TypeScript/static/js/453.814c0e13.chunk.js",
-    "static/media/Montserrat-Medium.ttf": "/Wizzard-battle-TypeScript/static/media/Montserrat-Medium.b8c6753baa964ccac1ba.ttf",
-    "static/media/Montserrat-Light.ttf": "/Wizzard-battle-TypeScript/static/media/Montserrat-Light.7179b7d2ac9b599db5f9.ttf",
-    "static/media/Montserrat-Regular.ttf": "/Wizzard-battle-TypeScript/static/media/Montserrat-Regular.24785cc015b27a3e964b.ttf",
-    "static/media/AveriaSerifLibre-Regular.ttf": "/Wizzard-battle-TypeScript/static/media/AveriaSerifLibre-Regular.f5ec4790e5215d707e70.ttf",
-    "static/media/cartman.jpg": "/Wizzard-battle-TypeScript/static/media/cartman.376d904c341055956108.jpg",
-    "static/media/Background.jpg": "/Wizzard-battle-TypeScript/static/media/Background.2c93d935ec69caa066df.jpg",
-    "index.html": "/Wizzard-battle-TypeScript/index.html",
-    "static/media/heart_3hgfdgqrwsv4.svg": "/Wizzard-battle-TypeScript/static/media/heart_3hgfdgqrwsv4.46ed2249110c46479b1dd75936b77d74.svg",
-    "static/media/heart_3hgfdgqrwsv4 (1).svg": "/Wizzard-battle-TypeScript/static/media/heart_3hgfdgqrwsv4 (1).16f269a861c84a6d12d3fa581aee5699.svg",
-    "main.d3168d0c.css.map": "/Wizzard-battle-TypeScript/static/css/main.d3168d0c.css.map",
-    "main.4582166a.js.map": "/Wizzard-battle-TypeScript/static/js/main.4582166a.js.map",
-    "453.814c0e13.chunk.js.map": "/Wizzard-battle-TypeScript/static/js/453.814c0e13.chunk.js.map"
+    "main.css": "/Wizard-battle-TypeScript/static/css/main.2f60f1cc.css",
+    "main.js": "/Wizard-battle-TypeScript/static/js/main.00dfb3f5.js",
+    "static/js/453.814c0e13.chunk.js": "/Wizard-battle-TypeScript/static/js/453.814c0e13.chunk.js",
+    "static/media/Montserrat-Medium.ttf": "/Wizard-battle-TypeScript/static/media/Montserrat-Medium.b8c6753baa964ccac1ba.ttf",
+    "static/media/Montserrat-Light.ttf": "/Wizard-battle-TypeScript/static/media/Montserrat-Light.7179b7d2ac9b599db5f9.ttf",
+    "static/media/Montserrat-Regular.ttf": "/Wizard-battle-TypeScript/static/media/Montserrat-Regular.24785cc015b27a3e964b.ttf",
+    "static/media/AveriaSerifLibre-Regular.ttf": "/Wizard-battle-TypeScript/static/media/AveriaSerifLibre-Regular.f5ec4790e5215d707e70.ttf",
+    "static/media/cartman.jpg": "/Wizard-battle-TypeScript/static/media/cartman.376d904c341055956108.jpg",
+    "static/media/Background.jpg": "/Wizard-battle-TypeScript/static/media/Background.2c93d935ec69caa066df.jpg",
+    "index.html": "/Wizard-battle-TypeScript/index.html",
+    "static/media/heart_3hgfdgqrwsv4.svg": "/Wizard-battle-TypeScript/static/media/heart_3hgfdgqrwsv4.46ed2249110c46479b1dd75936b77d74.svg",
+    "static/media/heart_3hgfdgqrwsv4 (1).svg": "/Wizard-battle-TypeScript/static/media/heart_3hgfdgqrwsv4 (1).16f269a861c84a6d12d3fa581aee5699.svg",
+    "main.2f60f1cc.css.map": "/Wizard-battle-TypeScript/static/css/main.2f60f1cc.css.map",
+    "main.00dfb3f5.js.map": "/Wizard-battle-TypeScript/static/js/main.00dfb3f5.js.map",
+    "453.814c0e13.chunk.js.map": "/Wizard-battle-TypeScript/static/js/453.814c0e13.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3168d0c.css",
-    "static/js/main.4582166a.js"
+    "static/css/main.2f60f1cc.css",
+    "static/js/main.00dfb3f5.js"
   ]
 }
