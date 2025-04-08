@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,3 +45,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+=======
+# Pet-project to practice skills:  
+* React
+* TypeScript
+* axios
+* React Router
+* Formik + Yup
+
+## Pet-project wizard-battle makes it possible to make a battle between two players. You can change independent or automatic opponent selection. With each hit, your and your opponent's health and mana getting smaller. Bring the battle to the end and find out the name of the winner! Don't forget to fill out the feedback form and rate the application.
+>>>>>>> f988ab919763762b2a999ecad5fdd3de4a0c5616
